@@ -1,5 +1,5 @@
 <!-- 
-  AstroClock - https://astroclock.ch - V6.3.7
+  AstroClock - https://astroclock.ch - V6.4.8
   Copyright © 2025–2026 AstroClock. All rights reserved.
   Unauthorized copying of this file is strictly prohibited.
   Autor and Owner:
@@ -90,7 +90,7 @@
     "name":"Astrology Calculator, Financial Astrology & AstroGANN Trading Signals | AstroClock",
     "description":"Free astrology calculator with natal charts, real-time transits, moon phases, eclipses, financial astrology, AstroGANN trading signals, Münchner Rhythmenlehre, Gemini AI integration and Swiss Ephemeris precision.",
     "inLanguage":"en",
-    "dateModified":"2026-10-18",
+    "dateModified":"2026-11-05",
     "primaryImageOfPage":{"@type":"ImageObject","url":"https://astroclock.ch/assets/hero-image-V02.jpg"},
     "keywords":"astrology, astroclock, birth chart, natal chart, horoscope, astrology calculator, real-time transits, astro-finance, financial astrology, trading astrology, astro trading, AstroGANN, astro-gann, w.d. gann, gann trading, gann fan, square of 9, planetary trading signals, planetary market cycles, crypto astrology, bitcoin astrology, market timing, stock market astrology, trading signals, münchner rhythmenlehre, rhythmenlehre, wolfgang döbereiner, döbereiner astrology, dobereiner astrology, life cycle astrology, 7 year astrology cycle, house activation cycle, astrological life phases, house progression astrology"
   }
@@ -4873,6 +4873,23 @@ background:
   border:1px solid rgba(212,175,55,.45);
 }
 
+.wheel-ring-inner{
+border-color:
+var(
+--wheel-weather-color,
+rgba(160,160,160,.6)
+);
+
+box-shadow:
+0 0 10px
+var(--wheel-weather-color,
+rgba(160,160,160,.6));
+
+transition:
+border-color .4s ease,
+box-shadow .4s ease;
+}
+
 .wheel-center{
   position:absolute;
   inset:13%;
@@ -4924,27 +4941,24 @@ background:
 .wheel-planet{
   position:absolute;
 
-  width:34px;
-  height:34px;
+  width:auto;
+  height:auto;
 
   transform:translate(-50%,-50%);
 
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
 
   font-size:clamp(
     1.25rem,
-    3.5vw,
+    5vw,
     1.8rem
   );
 
   cursor:pointer;
-
   z-index:400;
-
   text-shadow:none;
-
   pointer-events:auto;
 }
 
@@ -4968,7 +4982,7 @@ background:
 
   transform:translateX(-50%);
 
-  margin-top:2px;
+  margin-top:0.5em;
 
   font-size:.38em;
   opacity:.9;
@@ -4981,8 +4995,8 @@ background:
 .wheel-planet sup{
   position:absolute;
 
-  top:-2px;
-  right:-4px;
+  top:-0.65em;
+  right:-0.65em;
 
   font-size:.55em;
 }
@@ -5468,6 +5482,23 @@ body.gold-mode .wheel-planet-gann{
   aspect-ratio:1 / 1;
 
   border-radius:50%;
+}
+
+.wheel-ring-outer{
+border-color:
+var(
+--wheel-weather-color,
+rgba(160,160,160,.6)
+);
+
+box-shadow:
+0 0 10px
+var(--wheel-weather-color,
+rgba(160,160,160,.6));
+
+transition:
+border-color .4s ease,
+box-shadow .4s ease;
 }
 
 .wheel-chart{
@@ -6405,6 +6436,7 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
 
   <h4 id="settingsDisplayHeader">Display & Features</h4>
 
+<!--
 <div class="field">
   <label for="chartLayout" id="chartLayoutLabel">
     Chart Layout
@@ -6419,6 +6451,7 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
     </option>
   </select>
 </div>
+-->
 
 <div class="field">
   <label for="todayAnglesMode" id="todayAnglesModeLabel">
@@ -6427,15 +6460,16 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
 
   <select id="todayAnglesMode">
     <option value="realtime">
-      Real-time ASC/MC + Real-time Houses
+      Current Houses + Real-time ASC/MC (GPS)
     </option>
 
     <option value="natal">
-      Natal ASC/MC + Natal Houses
+      Natal Houses + Natal ASC/MC
     </option>
   </select>
 </div>
 
+<!--
 <div class="field">
   <label for="chartAspects" id="chartAspectsLabel">Chart aspects (Today)</label>
   <select id="chartAspects" aria-labelledby="chartAspectsLabel">
@@ -6443,10 +6477,11 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
     <option value="tn">Transit–Natal aspects</option>
   </select>
 </div>
+-->
 
 <div class="field">
   <label for="smokeSourceSelect" id="smokeSourceLabel" class="row">
-    Risk & Action Weather Signals
+    Risk & Action Weather Display
   </label>
   <select id="smokeSourceSelect" class="id-smoke-select">
       <option value="money_opportunity">Finance – Opportunity</option>
@@ -6458,6 +6493,7 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
   <p id="smoke_note" class="mobile-only-note"></p>
 </div>
 
+<!--
   <div class="field">
     <label for="timePrec" id="timePrecLabel">Entry/Exit precision</label>
     <select id="timePrec" aria-labelledby="timePrecLabel">
@@ -6465,6 +6501,7 @@ AstroClock is a free astrology calculator featuring natal charts, real-time astr
       <option value="date">Date only</option>
     </select>
   </div>
+-->
 
 <h4 id="settingsAstroGANNHeader">
   AstroGANN Trading Engine
@@ -12016,13 +12053,13 @@ special_conjunctions_natal: 'Special Conjunctions',
 special_conjunctions_transit: 'Cosmic Weather Signals',
 
 today_angles_mode_label:
-  "Current Positions Houses & Angles",
+  'Houses & Angles in "Current Planetary Positions"',
 
 today_angles_realtime:
-  "Real-time ASC/MC + Real-time Houses",
+  "Current Houses + Real-time Angles (GPS)",
 
 today_angles_natal:
-  "Natal ASC/MC + Natal Houses",
+  "Natal Houses + Natal Angles",
 
 inner_alchemy_active:
   "Inner alchemy is active",
@@ -12304,7 +12341,7 @@ time_std_lmt: 'LMT (Local Mean Time via longitude)',
 time_standard_label: "Interpret birth time as",
 time_standard_desc: "Used only for birth time input. Does not affect “Local now”.",
 
-smoke_label: 'Risk & Action Weather Signals',
+smoke_label: 'Wheel Center Color',
 smoke_money_opportunity: 'Finances – Opportunity',
 smoke_money_judgment:    'Finances – Judgment',
 smoke_life_opportunity:  'Life – Opportunity',
@@ -12428,7 +12465,7 @@ oracle_placeholder: 'e.g. What is my hidden talent? / Is today a good day for a 
       settings_title:'Settings',
       settings_zodiac_header:'Calculations & Zodiac',
       settings_ephem_header:'Time & Precision',
-      settings_display_header:'Display & Features',
+      settings_display_header:'Display',
       settings_zodiac_label:'Zodiac system',
       settings_ephem_label:'Positions computed by',
       settings_timeprec_label:'Entry/Exit precision',
@@ -12615,13 +12652,13 @@ special_conjunctions_natal: 'Conjunciones especiales',
 special_conjunctions_transit: 'Señales del Clima Cósmico',
 
 today_angles_mode_label:
-  "Casas y ángulos de las posiciones planetarias actuales",
+  'Casas y ángulos en "Posiciones planetarias actuales"',
 
 today_angles_realtime:
-  "ASC/MC en tiempo real + Casas en tiempo real",
+  "Casas actuales + ángulos en tiempo real (GPS)",
 
 today_angles_natal:
-  "ASC/MC natales + Casas natales",
+  "Casas natales + ángulos natales",
   
 inner_alchemy_active:
   "La alquimia interior está activa",
@@ -12908,7 +12945,6 @@ planet_effects: {
   Pluto:'intensifica poder, transformación y sanación profunda'
 },
 
-
 score_tooltip: {
   intensity_title: "Puntuación",
   ranges: [    
@@ -12929,7 +12965,7 @@ time_std_lmt: 'LMT (Hora Media Local por longitud)',
 time_standard_label: "Interpretar la hora de nacimiento como",
 time_standard_desc: "Solo para la hora de nacimiento. No afecta “Hora local”.",
 
-smoke_label: 'Clima de Riesgo y Acción',
+smoke_label: 'Color del centro de la rueda',
 smoke_money_opportunity: 'Finanzas – Oportunidad',
 smoke_money_judgment:    'Finanzas – Claridad',
 smoke_life_opportunity:  'Vida – Oportunidad',
@@ -13025,7 +13061,7 @@ oracle_placeholder: 'ej. ¿Cuál es mi talento oculto? / ¿Hoi es buen dia para 
       settings_title:'Ajustes',
       settings_zodiac_header:'Cálculos y zodiaco',
       settings_ephem_header:'Tiempo y precisión',
-      settings_display_header:'Pantalla y funciones',
+      settings_display_header:'Pantalla',
       settings_zodiac_label:'Sistema zodiacal',
       settings_ephem_label:'Posiciones calculadas por',
       settings_timeprec_label:'Precisión de entrada/salida',
@@ -13368,7 +13404,7 @@ time_std_lmt: 'LMT (Tempo Medio Locale da longitudine)',
 time_standard_label: "Interpreta l’ora di nascita come",
 time_standard_desc: "Usato solo per l’orario di nascita. Non influisce su “Ora locale”.",
 
-smoke_label: 'Segnali meteo di Rischio e Azione',
+smoke_label: 'Colore del centro della ruota',
 smoke_money_opportunity: 'Finanze – Opportunità',
 smoke_money_judgment:    'Finanze – Chiarezza',
 smoke_life_opportunity:  'Vita – Opportunità',
@@ -13443,13 +13479,13 @@ special_conjunctions_natal: 'Congiunzioni speciali',
 special_conjunctions_transit: 'Segnali Meteo Cosmici',
 
 today_angles_mode_label:
-  "Case e angoli delle posizioni planetarie attuali",
+  'Case e angoli in "Posizioni planetarie attuali"',
 
 today_angles_realtime:
-  "ASC/MC in tempo reale + Case in tempo reale",
+  "Case attuali + angoli in tempo reale (GPS)",
 
 today_angles_natal:
-  "ASC/MC natali + Case natali",
+  "Case natali + angoli natali",
   
 inner_alchemy_active:
   "L’alchimia interiore è attiva",
@@ -13631,7 +13667,7 @@ oracle_placeholder: 'es. Qual è il mio talento nascosto? / Oggi è un buon gior
       settings_title:'Impostazioni',
       settings_zodiac_header:'Calcoli e zodiaco',
       settings_ephem_header:'Tempo e precisione',
-      settings_display_header:'Visualizzazione e funzioni',
+      settings_display_header:'Visualizzazione',
       settings_zodiac_label:'Sistema zodiacale',
       settings_ephem_label:'Posizioni calcolate da',
       settings_timeprec_label:'Precisione di entrata/uscita',
@@ -13863,13 +13899,13 @@ special_conjunctions_natal: 'Besondere Konjunktionen',
 special_conjunctions_transit: 'Kosmische Wettersignale',
 
 today_angles_mode_label:
-  "Häuser & Winkel aktueller Planetenpositionen",
+  'Häuser & Winkel in "Aktuelle Planetenpositionen"',
 
 today_angles_realtime:
-  "Echtzeit-ASC/MC + Echtzeit-Häuser",
+  "Aktuelle Häuser + Echtzeit-Winkel (GPS)",
 
 today_angles_natal:
-  "Radix-ASC/MC + Radix-Häuser",
+  "Radix-Häuser + Radix-Winkel",
 
 inner_alchemy_active:
   "Innere Alchemie ist aktiv",
@@ -13967,7 +14003,7 @@ time_std_lmt: 'LMT (Ortsmittlere Zeit nach Längengrad)',
 time_standard_label: "Geburtszeit interpretieren als",
 time_standard_desc: "Nur für die Geburtszeit‑Eingabe. Beeinflusst „Lokale Zeit jetzt“ nicht.",
 
-smoke_label: 'Risiko- und Handlungswetter',
+smoke_label: 'Farbe des Rad-Zentrums',
 smoke_money_opportunity: 'Finanzen – Chancenlage',
 smoke_money_judgment:    'Finanzen – Klarheit',
 smoke_life_opportunity:  'Leben – Chancenlage',
@@ -14273,7 +14309,7 @@ oracle_placeholder: 'z.B. Was ist mein verborgenes Talent? / Ist heute ein guter
   settings_title:'Einstellungen',
   settings_zodiac_header:'Berechnungen & Tierkreis',
   settings_ephem_header:'Zeit & Präzision',
-  settings_display_header:'Anzeige & Funktionen',
+  settings_display_header:'Anzeige',
   settings_zodiac_label:'Tierkreissystem',
   settings_ephem_label:'Positionen berechnet von',
   settings_timeprec_label:'Genauigkeit Ein-/Austritt',
@@ -14470,13 +14506,13 @@ special_conjunctions_natal: 'Conjonctions spéciales',
 special_conjunctions_transit: 'Signaux Météo Cosmiques',
 
 today_angles_mode_label:
-  "Maisons et angles des positions planétaires actuelles",
+  'Maisons et angles en "Positions planétaires actuelles"',
 
 today_angles_realtime:
-  "ASC/MC en temps réel + Maisons en temps réel",
+  "Maisons actuelles + angles en temps réel (GPS)",
 
 today_angles_natal:
-  "ASC/MC natals + Maisons natales",
+  "Maisons natales + angles natals",
   
 inner_alchemy_active:
   "L'alchimie intérieure est active",
@@ -14513,7 +14549,7 @@ time_std_lmt: 'LMT (Temps moyen local via longitude)',
 time_standard_label: "Interpréter l’heure de naissance comme",
 time_standard_desc: "Utilisé uniquement pour l’heure de naissance. N’affecte pas l’« heure locale ».",
 
-smoke_label: 'Météo des risques et actions',
+smoke_label: 'Couleur du centre de la roue',
 smoke_money_opportunity: 'Finance – Opportunité',
 smoke_money_judgment:    'Finance – Clarté',
 smoke_life_opportunity:  'Vie – Opportunité',
@@ -14865,7 +14901,7 @@ oracle_placeholder: 'par ex. Quel est mon talent caché ? / Est-ce un bon jour p
       settings_title:'Réglages',
       settings_zodiac_header:'Calculs et zodiaque',
       settings_ephem_header:'Temps et précision',
-      settings_display_header:'Affichage et fonctionnalités',
+      settings_display_header:'Affichage',
       settings_zodiac_label:'Système zodiacal',
       settings_ephem_label:'Positions calculées par',
       settings_timeprec_label:'Précision entrée/sortie',
@@ -16202,7 +16238,7 @@ function setSettingsTexts(){ const t = I18N[LANG];
 if (ph) ph.textContent = t.profiles_title || 'Saved Profiles';
   const zh=$('settingsZodiacHeader'); if(zh) zh.textContent = t.settings_zodiac_header || 'Calculations & Zodiac';
   const eh=$('settingsEphemHeader'); if(eh) eh.textContent = t.settings_ephem_header || 'Time & Precision';
-  const dh=$('settingsDisplayHeader'); if(dh) dh.textContent = t.settings_display_header || 'Display & Features';
+  const dh=$('settingsDisplayHeader'); if(dh) dh.textContent = t.settings_display_header || 'Display';
   const sh = $('settingsSimHeader');
 	if (sh) sh.textContent = t.sim_label || 'Simulation';
   const zl=$('zodiacLabel'); if(zl) zl.textContent = t.settings_zodiac_label || 'Zodiac system';
@@ -16269,7 +16305,7 @@ if (optRealtime) {
 
   optRealtime.textContent =
     t.today_angles_realtime ||
-    'Real-time ASC/MC + Real-time Houses';
+    'Current Houses + Real-time Angles (GPS)';
 
 }
 
@@ -16282,7 +16318,7 @@ if (optNatal) {
 
   optNatal.textContent =
     t.today_angles_natal ||
-    'Natal ASC/MC + Natal Houses';
+    'Natal Houses + Natal Angles';
 
 }
 
@@ -16363,7 +16399,7 @@ if (trueNodeOpt) {
 // =============================
 const smokeLabel = document.getElementById('smokeSourceLabel');
 if (smokeLabel) {
-  smokeLabel.textContent = t.smoke_label || 'Risk & Action Weather Signals';
+  smokeLabel.textContent = t.smoke_label || 'Wheel Center Color';
 }
 const smokeNote = document.getElementById('smoke_note');
 if (smokeNote) {
@@ -17683,22 +17719,30 @@ return (idxAsc + h - 1) * 30;
 // ---------- houseNumsBySign ----------
   // For any house system, assign each house number to the SIGN that contains its cusp.
   // In Placidus this prevents missing/doubled house labels in sign cards.
-  const houseNumsBySign = Object.create(null);
-  (activeSigns || []).forEach(s => { houseNumsBySign[s.key] = []; });
 
-  for (let h = 1; h <= 12; h++) {
-    const cl = cuspLon(h);
-    if (!Number.isFinite(cl)) continue;
-    const sk = signFromLon(cl).key;
-    if (!houseNumsBySign[sk]) houseNumsBySign[sk] = [];
-    houseNumsBySign[sk].push(h);
+const houseNumsBySign = Object.create(null);
+
+(activeSigns || []).forEach(s => {
+  houseNumsBySign[s.key] = [];
+});
+
+// Assign sign -> house using the sign midpoint,
+// exactly the same logic already used by houseForSignKey()
+
+for (const s of (activeSigns || [])) {
+
+  const h =
+    houseForSignKey(s.key);
+
+  if (
+    Number.isFinite(h) &&
+    !houseNumsBySign[s.key].includes(h)
+  ) {
+    houseNumsBySign[s.key].push(h);
   }
 
-  // Optional: sort the numbers so they display neatly (H1,H2 not H2,H1)
-  for (const k in houseNumsBySign) {
-    houseNumsBySign[k].sort((a,b) => a - b);
-  }
-  
+}
+
   return { system: sys, ascLon: asc, houseOfLon, houseForSignKey, cuspLon, houseSignKey, houseNumsBySign };
 }
 
@@ -19017,7 +19061,68 @@ function buildHouseModal(ctx){
   const h = Number(ctx.houseNum);
   const longitudes = ctx.longitudes || {};
   const retroMap   = ctx.retroMap   || {};
-  const resolver   = ctx.houseResolver;
+  
+let resolver = null;
+
+const activeSigns =
+  SETTINGS.zodiac === "true_sidereal"
+    ? SIGNS_13
+    : SIGNS_12;
+
+if (
+  VIEW_MODE === "mychart" &&
+  NATAL &&
+  Number.isFinite(NATAL.ascLon)
+) {
+
+  resolver = buildHouseResolver({
+    system: SETTINGS.houseSystem,
+    ascLon: NATAL.ascLon,
+    activeSigns,
+    cusps:
+      SETTINGS.houseSystem === "placidus"
+        ? NATAL.houseCusps
+        : null
+  });
+
+}
+else if (VIEW_MODE === "today") {
+
+  const useNatalHouses =
+    SETTINGS.todayAnglesMode === "natal" &&
+    NATAL &&
+    Number.isFinite(NATAL.ascLon);
+
+  if (useNatalHouses) {
+
+    resolver = buildHouseResolver({
+      system: SETTINGS.houseSystem,
+      ascLon: NATAL.ascLon,
+      activeSigns,
+      cusps:
+        SETTINGS.houseSystem === "placidus"
+          ? NATAL.houseCusps
+          : null
+    });
+
+  }
+  else if (
+    Number.isFinite(window.REALTIME_ASC_LON)
+  ) {
+
+    resolver = buildHouseResolver({
+      system: SETTINGS.houseSystem,
+      ascLon: window.REALTIME_ASC_LON,
+      activeSigns,
+      cusps:
+        SETTINGS.houseSystem === "placidus"
+          ? window.REALTIME_HOUSE_CUSPS
+          : null
+    });
+
+  }
+
+}
 
   const houseTitle =
   Number.isFinite(h)
@@ -19166,7 +19271,16 @@ const title = `
       }
 
       // Full section render
-      try { body += renderPlanetFullSection(ruler, longitudes, retroMap, LANG, t); } catch{}
+try {
+  body += renderPlanetFullSection(
+    ruler,
+    longitudes,
+    retroMap,
+    LANG,
+    t,
+    resolver
+  );
+} catch{}
     }
   } catch(e){
     console.warn("Ruler block failed:", e);
@@ -19302,7 +19416,16 @@ ${badges}
       `;
     }
 
-    try { body += renderPlanetFullSection(p, longitudes, retroMap, LANG, t); } catch{}
+    try {
+  body += renderPlanetFullSection(
+    p,
+    longitudes,
+    retroMap,
+    LANG,
+    t,
+    resolver
+  );
+} catch{}
   }
 
   return { title, body };
@@ -20206,7 +20329,14 @@ function planetsInSign(longitudes, signKey) {
 // here we render the body blocks: placement, dignity, retro, correspondences, hermetic archetype)
 // Renders one planet section with full info (header badges already in the sign header,
 // here we render the body blocks: placement, dignity, retro, correspondences, hermetic archetype)
-function renderPlanetFullSection(p, longitudes, retroMap, LANG, t) {
+function renderPlanetFullSection(
+  p,
+  longitudes,
+  retroMap,
+  LANG,
+  t,
+  providedResolver = null
+) {
 
   // Longitudes and sign
   const lon = longitudes[p];
@@ -20222,8 +20352,8 @@ try {
       ? SIGNS_13
       : SIGNS_12;
 
-  let resolver = null;
-
+  let resolver = providedResolver;
+  if (!resolver) {
   // ==========================================
   // BIRTH CHART -> always natal houses
   // ==========================================
@@ -20312,7 +20442,7 @@ try {
     }
 
   }
-
+  }
   const houseNum =
     resolver?.houseOfLon(lon);
 
@@ -22835,6 +22965,269 @@ const sectorsSvg =
     '.wheel-sectors'
   );
   
+// =====================================
+// PLANET / ZODIAC SEPARATOR RING
+// =====================================
+
+const separatorSvgRadius =
+  (
+    SIGN_RING_R * 0.9 +
+    PLANET_RING_R * 0.04
+  ) * (500 / SIZE);
+
+const separatorRing =
+  document.createElementNS(
+    'http://www.w3.org/2000/svg',
+    'circle'
+  );
+
+separatorRing.setAttribute(
+  'cx',
+  '500'
+);
+
+separatorRing.setAttribute(
+  'cy',
+  '500'
+);
+
+separatorRing.setAttribute(
+  'r',
+  separatorSvgRadius
+);
+
+separatorRing.setAttribute(
+  'fill',
+  'none'
+);
+
+separatorRing.setAttribute(
+  'stroke',
+  'rgba(212,175,55,0.35)'
+);
+
+separatorRing.setAttribute(
+  'stroke-width',
+  '1.5'
+);
+
+separatorRing.setAttribute(
+  'vector-effect',
+  'non-scaling-stroke'
+);
+
+sectorsSvg.appendChild(
+  separatorRing
+);
+
+// =====================================
+// INNER ZODIAC BAND RING
+// =====================================
+
+const innerBandRing =
+  document.createElementNS(
+    'http://www.w3.org/2000/svg',
+    'circle'
+  );
+
+innerBandRing.setAttribute(
+  'cx',
+  '500'
+);
+
+innerBandRing.setAttribute(
+  'cy',
+  '500'
+);
+
+innerBandRing.setAttribute(
+  'r',
+  separatorSvgRadius - 30
+);
+
+innerBandRing.setAttribute(
+  'fill',
+  'none'
+);
+
+innerBandRing.setAttribute(
+  'stroke',
+  'rgba(212,175,55,0.25)'
+);
+
+innerBandRing.setAttribute(
+  'stroke-width',
+  '1'
+);
+
+innerBandRing.setAttribute(
+  'vector-effect',
+  'non-scaling-stroke'
+);
+
+sectorsSvg.appendChild(
+  innerBandRing
+);
+
+// =====================================
+// DEGREE LABELS (0,10,20)
+// =====================================
+
+if (SETTINGS.zodiac !== 'true_sidereal') {
+
+  for (let sign = 0; sign < 12; sign++) {
+
+    [0, 10, 20].forEach(offset => {
+
+      const deg =
+        sign * 30 + offset;
+
+      const angle =
+        (deg - 90) *
+        Math.PI / 180;
+
+      const r =
+        separatorSvgRadius - 22;
+
+      const x =
+        500 +
+        Math.cos(angle) * r;
+
+      const y =
+        500 +
+        Math.sin(angle) * r;
+
+      const txt =
+        document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'text'
+        );
+
+      txt.setAttribute('x', x);
+      txt.setAttribute('y', y);
+
+      txt.setAttribute(
+        'text-anchor',
+        'middle'
+      );
+
+      txt.setAttribute(
+        'dominant-baseline',
+        'middle'
+      );
+
+      txt.setAttribute(
+        'fill',
+        'rgba(212,175,55,0.75)'
+      );
+
+      txt.setAttribute(
+        'font-size',
+        '10'
+      );
+
+      txt.textContent =
+        offset;
+
+      sectorsSvg.appendChild(
+        txt
+      );
+
+    });
+
+  }
+
+}
+
+// =====================================
+// DEGREE MARKERS (1°, 5°, 10°)
+// =====================================
+
+for (let deg = 0; deg < 360; deg++) {
+
+  const angle =
+    (deg - 90) *
+    Math.PI / 180;
+
+  let tickLength;
+  let tickWidth;
+  let tickOpacity;
+
+  if (deg % 10 === 0) {
+
+    tickLength = 16;
+    tickWidth  = 1.5;
+    tickOpacity = 0.75;
+
+  }
+  else if (deg % 5 === 0) {
+
+    tickLength = 10;
+    tickWidth  = 1.0;
+    tickOpacity = 0.60;
+
+  }
+  else {
+
+    tickLength = 5;
+    tickWidth  = 0.8;
+    tickOpacity = 0.45;
+
+  }
+
+  const outerR =
+    separatorSvgRadius + 2;
+
+  const innerR =
+    outerR - tickLength;
+
+  const x1 =
+    500 +
+    Math.cos(angle) * outerR;
+
+  const y1 =
+    500 +
+    Math.sin(angle) * outerR;
+
+  const x2 =
+    500 +
+    Math.cos(angle) * innerR;
+
+  const y2 =
+    500 +
+    Math.sin(angle) * innerR;
+
+  const tick =
+    document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'line'
+    );
+
+  tick.setAttribute('x1', x1);
+  tick.setAttribute('y1', y1);
+
+  tick.setAttribute('x2', x2);
+  tick.setAttribute('y2', y2);
+
+  tick.setAttribute(
+    'stroke',
+    `rgba(212,175,55,${tickOpacity})`
+  );
+
+  tick.setAttribute(
+    'stroke-width',
+    tickWidth
+  );
+
+  tick.setAttribute(
+    'vector-effect',
+    'non-scaling-stroke'
+  );
+
+  sectorsSvg.appendChild(tick);
+
+}
+
 const boundaries =
   SETTINGS.zodiac === 'true_sidereal'
     ? TS_BOUNDARIES.map(([start]) => start)
@@ -23370,7 +23763,7 @@ if (SETTINGS.zodiac === 'true_sidereal') {
 
 }
 
-    const r = SIGN_RING_R;
+    const r = SIGN_RING_R+2;
 
     const x =
       Math.cos(
@@ -24349,19 +24742,35 @@ function getSmokeColor(domain, metric, score) {
 }
 
 function applyCenterSmoke(color) {
-  const grid = document.querySelector('.chart-grid');
-
-  if (grid) {
-    grid.style.setProperty('--smoke-color', color);
-  } else {
-    // Fallback & retry on next frame (chart not mounted yet)
-    requestAnimationFrame(() => {
-      const retryGrid = document.querySelector('.chart-grid');
-      if (retryGrid) {
-        retryGrid.style.setProperty('--smoke-color', color);
-      }
-    });
-  }
+const grid =
+document.querySelector('.chart-grid');
+if (grid) {
+grid.style.setProperty(
+'--smoke-color',
+color
+);
+grid.style.setProperty(
+'--wheel-weather-color',
+color
+);
+} else {
+requestAnimationFrame(() => {
+const retryGrid =
+document.querySelector(
+'.chart-grid'
+);
+if (retryGrid) {
+retryGrid.style.setProperty(
+'--smoke-color',
+color
+);
+retryGrid.style.setProperty(
+'--wheel-weather-color',
+color
+);
+}
+});
+}
 }
 
 // =========================
@@ -48707,11 +49116,11 @@ document.getElementById('openBlog')?.addEventListener('click', () => {
       <a href="/articles.html">Articles Library</a>
       <a href="/terms.html">Terms &amp; Conditions</a>
       <a href="/privacy.html">Privacy Policy</a>
-    </nav>
+  </nav>
     <div class="seo-footer-copy">
       <div class="footer-origin" style="margin-bottom: 4px; font-weight: 500;">Developed in Switzerland 🇨🇭 by Robin Gröble</div>
       © 2025–2026 AstroClock. All rights reserved.
-     <!-- <span style="display: none;">V3.0.5</span> -->
+     <!-- <span style="display: none;">V6.4.8</span> -->
     </div>
   </div>
 </footer>
