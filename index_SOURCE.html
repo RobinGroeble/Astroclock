@@ -1,5 +1,5 @@
 <!-- 
-  AstroClock - https://astroclock.ch - V6.5.1
+  AstroClock - https://astroclock.ch - V6.5.2
   Copyright © 2025–2026 AstroClock. All rights reserved.
   Unauthorized copying of this file is strictly prohibited.
   Autor and Owner:
@@ -90,7 +90,7 @@
     "name":"Astrology Calculator, Financial Astrology & AstroGANN Trading Signals | AstroClock",
     "description":"Free astrology calculator with natal charts, real-time transits, moon phases, eclipses, financial astrology, AstroGANN trading signals, Münchner Rhythmenlehre, Gemini AI integration and Swiss Ephemeris precision.",
     "inLanguage":"en",
-    "dateModified":"2026-11-07",
+    "dateModified":"2026-11-08",
     "primaryImageOfPage":{"@type":"ImageObject","url":"https://astroclock.ch/assets/hero-image-V02.jpg"},
     "keywords":"astrology, astroclock, birth chart, natal chart, horoscope, astrology calculator, real-time transits, astro-finance, financial astrology, trading astrology, astro trading, AstroGANN, astro-gann, w.d. gann, gann trading, gann fan, square of 9, planetary trading signals, planetary market cycles, crypto astrology, bitcoin astrology, market timing, stock market astrology, trading signals, münchner rhythmenlehre, rhythmenlehre, wolfgang döbereiner, döbereiner astrology, dobereiner astrology, life cycle astrology, 7 year astrology cycle, house activation cycle, astrological life phases, house progression astrology"
   }
@@ -12495,7 +12495,7 @@ time_std_lmt: 'LMT (Local Mean Time via longitude)',
 time_standard_label: "Interpret birth time as",
 time_standard_desc: "Used only for birth time input. Does not affect “Local now”.",
 
-smoke_label: 'Wheel Center Color',
+smoke_label: 'Wheel Color',
 smoke_money_opportunity: 'Finances – Opportunity',
 smoke_money_judgment:    'Finances – Judgment',
 smoke_life_opportunity:  'Life – Opportunity',
@@ -13119,7 +13119,7 @@ time_std_lmt: 'LMT (Hora Media Local por longitud)',
 time_standard_label: "Interpretar la hora de nacimiento como",
 time_standard_desc: "Solo para la hora de nacimiento. No afecta “Hora local”.",
 
-smoke_label: 'Color del centro de la rueda',
+smoke_label: 'Color de la rueda',
 smoke_money_opportunity: 'Finanzas – Oportunidad',
 smoke_money_judgment:    'Finanzas – Claridad',
 smoke_life_opportunity:  'Vida – Oportunidad',
@@ -13558,7 +13558,7 @@ time_std_lmt: 'LMT (Tempo Medio Locale da longitudine)',
 time_standard_label: "Interpreta l’ora di nascita come",
 time_standard_desc: "Usato solo per l’orario di nascita. Non influisce su “Ora locale”.",
 
-smoke_label: 'Colore del centro della ruota',
+smoke_label: 'Colore della ruota',
 smoke_money_opportunity: 'Finanze – Opportunità',
 smoke_money_judgment:    'Finanze – Chiarezza',
 smoke_life_opportunity:  'Vita – Opportunità',
@@ -14157,7 +14157,7 @@ time_std_lmt: 'LMT (Ortsmittlere Zeit nach Längengrad)',
 time_standard_label: "Geburtszeit interpretieren als",
 time_standard_desc: "Nur für die Geburtszeit‑Eingabe. Beeinflusst „Lokale Zeit jetzt“ nicht.",
 
-smoke_label: 'Farbe des Rad-Zentrums',
+smoke_label: 'Farbe des Horoskoprades',
 smoke_money_opportunity: 'Finanzen – Chancenlage',
 smoke_money_judgment:    'Finanzen – Klarheit',
 smoke_life_opportunity:  'Leben – Chancenlage',
@@ -14703,7 +14703,7 @@ time_std_lmt: 'LMT (Temps moyen local via longitude)',
 time_standard_label: "Interpréter l’heure de naissance comme",
 time_standard_desc: "Utilisé uniquement pour l’heure de naissance. N’affecte pas l’« heure locale ».",
 
-smoke_label: 'Couleur du centre de la roue',
+smoke_label: 'Couleur de la roue',
 smoke_money_opportunity: 'Finance – Opportunité',
 smoke_money_judgment:    'Finance – Clarté',
 smoke_life_opportunity:  'Vie – Opportunité',
@@ -16553,7 +16553,7 @@ if (trueNodeOpt) {
 // =============================
 const smokeLabel = document.getElementById('smokeSourceLabel');
 if (smokeLabel) {
-  smokeLabel.textContent = t.smoke_label || 'Wheel Center Color';
+  smokeLabel.textContent = t.smoke_label || 'Wheel Color';
 }
 const smokeNote = document.getElementById('smoke_note');
 if (smokeNote) {
@@ -48618,8 +48618,8 @@ window.globalAiCalculatorText = (nameStr ? `Name: ${nameStr}\n\n` : '') + `Sun i
   const raw = localStorage.getItem('astroProfiles');
   const data = raw ? JSON.parse(raw) : { profiles: {}, activeProfile: null };
 
-  // limit to 10 profiles
-  if (!data.profiles[name] && Object.keys(data.profiles).length >= 10) {
+  // limit to 20 profiles (Search: MAX_PROFILES, Max Profiles)
+  if (!data.profiles[name] && Object.keys(data.profiles).length >= 20) {
     const oldest = Object.keys(data.profiles)[0];
     delete data.profiles[oldest];
   }
@@ -49275,7 +49275,7 @@ document.getElementById('openBlog')?.addEventListener('click', () => {
     <div class="seo-footer-copy">
       <div class="footer-origin" style="margin-bottom: 4px; font-weight: 500;">Developed in Switzerland 🇨🇭 by Robin Gröble</div>
       © 2025–2026 AstroClock. All rights reserved.
-     <!-- <span style="display: none;">V6.5.1</span> -->
+     <!-- <span style="display: none;">V6.5.2</span> -->
     </div>
   </div>
 </footer>
