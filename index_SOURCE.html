@@ -1,5 +1,5 @@
 <!-- 
-  AstroClock - https://astroclock.ch - V6.5.6
+  AstroClock - https://astroclock.ch - V6.5.7
   Copyright © 2025–2026 AstroClock. All rights reserved.
   Unauthorized copying of this file is strictly prohibited.
   Autor and Owner:
@@ -90,7 +90,7 @@
     "name":"Astrology Calculator, Financial Astrology & AstroGANN Trading Signals | AstroClock",
     "description":"Free astrology calculator with natal charts, real-time transits, moon phases, eclipses, financial astrology, AstroGANN trading signals, Münchner Rhythmenlehre, Gemini AI integration and Swiss Ephemeris precision.",
     "inLanguage":"en",
-    "dateModified":"2026-11-10",
+    "dateModified":"2026-11-12",
     "primaryImageOfPage":{"@type":"ImageObject","url":"https://astroclock.ch/assets/hero-image-V02.jpg"},
     "keywords":"astrology, astroclock, birth chart, natal chart, horoscope, astrology calculator, real-time transits, astro-finance, financial astrology, trading astrology, astro trading, AstroGANN, astro-gann, w.d. gann, gann trading, gann fan, square of 9, planetary trading signals, planetary market cycles, crypto astrology, bitcoin astrology, market timing, stock market astrology, trading signals, münchner rhythmenlehre, rhythmenlehre, wolfgang döbereiner, döbereiner astrology, dobereiner astrology, life cycle astrology, 7 year astrology cycle, house activation cycle, astrological life phases, house progression astrology"
   }
@@ -12082,6 +12082,7 @@ lunar_node_mean: "Mean Lunar Nodes",
   location_for_angles: "Location Used for ASC, MC, DSC & IC Calculation",
   gps_label: "GPS",
   birthplace_label: "Birth Place Fallback",
+  ip_label: "Approximate IP Location",
 
 calc_format_prefix: 'Format: ',
 
@@ -13182,6 +13183,7 @@ lunar_node_mean: "Nodos Lunares Medios",
   location_for_angles: "Ubicación utilizada para el cálculo de ASC, MC, DSC e IC",
   gps_label: "GPS",
   birthplace_label: "Lugar de nacimiento (respaldo)",
+ip_label: "Ubicación aproximada (IP)",
 
 calc_format_prefix: 'Formato: ',
 
@@ -13273,6 +13275,7 @@ lunar_node_mean: "Nodi Lunari Medi",
   location_for_angles: "Posizione utilizzata per il calcolo di ASC, MC, DSC e IC",
   gps_label: "GPS",
   birthplace_label: "Luogo di nascita (fallback)",
+ip_label: "Posizione approssimativa (IP)",
 
 calc_format_prefix: 'Formato: ',
 
@@ -14417,6 +14420,7 @@ lunar_node_mean: "Mittlere Mondknoten",
   location_for_angles: "Für die Berechnung von ASC, MC, DSC und IC verwendeter Standort",
   gps_label: "GPS",
   birthplace_label: "Geburtsort (Fallback)",
+ip_label: "Ungefährer Standort (IP)",
 
 calc_format_prefix: 'Format: ',
 
@@ -14519,6 +14523,7 @@ lunar_node_mean: "Nœuds Lunaires Moyens",
   location_for_angles: "Position utilisée pour le calcul de l’ASC, MC, DSC et IC",
   gps_label: "GPS",
   birthplace_label: "Lieu de naissance (secours)",
+ip_label: "Position approximative (IP)",
 
 calc_format_prefix: 'Format : ',
 
@@ -25426,10 +25431,37 @@ if (
 const shortName =
   window.REALTIME_GEO.name.split(',')[0];
 
-const sourceText =
-  window.REALTIME_GEO.source === 'gps'
-    ? (I18N[LANG].gps_label || 'GPS')
-    : (I18N[LANG].birthplace_label || 'Birth Place');
+let sourceText;
+
+switch (window.REALTIME_GEO.source) {
+
+  case 'gps':
+
+    sourceText =
+
+      I18N[LANG].gps_label || 'GPS';
+
+    break;
+
+  case 'ip':
+
+    sourceText =
+
+      I18N[LANG].ip_label ||
+
+      'Approximate IP Location';
+
+    break;
+
+  default:
+
+    sourceText =
+
+      I18N[LANG].birthplace_label ||
+
+      'Birth Place Fallback';
+
+}
 
 locLine.innerHTML = `
   ${I18N[LANG].location_for_angles}:
@@ -47702,31 +47734,97 @@ window.REALTIME_GEO = {
   source: 'gps'
 };
 
+} catch {
+
+  // ==========================
+
+  // IP GEOLOCATION FALLBACK
+
+  // ==========================
+
+  try {
+
+    const ip =
+
+      await fetch(
+
+        'https://ipapi.co/json/'
+
+      ).then(r => r.json());
+
+    if (
+
+      Number.isFinite(ip.latitude) &&
+
+      Number.isFinite(ip.longitude)
+
+    ) {
+
+      window.REALTIME_GEO = {
+
+        name:
+
+          ip.city ||
+
+          'Approximate Location',
+
+        lat: ip.latitude,
+
+        lon: ip.longitude,
+
+        source: 'ip'
+
+      };
+
+    } else {
+
+      throw new Error();
+
+    }
+
   } catch {
 
-    const formData = loadFormData();
+    // ==========================
+
+    // BIRTHPLACE FALLBACK
+
+    // ==========================
+
+    const formData =
+
+      loadFormData();
 
     if (formData?.birthPlace) {
 
       try {
 
         const geo =
+
           await geocodePlace(
+
             formData.birthPlace
+
           );
 
-window.REALTIME_GEO = {
-  name: geo.name,
-  lat: geo.lat,
-  lon: geo.lon,
-  source: 'birthplace'
-};
+        window.REALTIME_GEO = {
+
+          name: geo.name,
+
+          lat: geo.lat,
+
+          lon: geo.lon,
+
+          source: 'birthplace'
+
+        };
 
       } catch {}
 
     }
 
   }
+
+}
 
 if (window.REALTIME_GEO) {
 
@@ -49308,7 +49406,7 @@ document.getElementById('openBlog')?.addEventListener('click', () => {
     <div class="seo-footer-copy">
       <div class="footer-origin" style="margin-bottom: 4px; font-weight: 500;">Developed in Switzerland 🇨🇭 by Robin Gröble</div>
       © 2025–2026 AstroClock. All rights reserved.
-     <!-- <span style="display: none;">V6.5.6</span> -->
+     <!-- <span style="display: none;">V6.5.7</span> -->
     </div>
   </div>
 </footer>
