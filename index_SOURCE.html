@@ -3534,6 +3534,7 @@ label[for="birthPlace"] {
 #couple-date,
 #couple-time,
 #couple-place,
+#simNowInput,
 #manualLocation,
 #oracleUserQuery {
   background-color: #0b0c10;
@@ -3571,6 +3572,8 @@ label[for="birthPlace"] {
 #couple-time:focus,
 #couple-place:hover,
 #couple-place:focus,
+#simNowInput:hover,
+#simNowInput:focus,
 #manualLocation:hover,
 #manualLocation:focus,
 #oracleUserQuery:hover,
@@ -3610,6 +3613,7 @@ label[for="birthPlace"] {
 #couple-date,
 #couple-time,
 #couple-place,
+#simNowInput,
 #manualLocation,
 #oracleUserQuery {
   letter-spacing: 0.3px;
@@ -3793,7 +3797,7 @@ font-size: 1.5rem;
 }
 
 /* Prevent iOS Safari from collapsing date and time input elements */
-#birthDate, #birthTime, #birthName, #birthPlace, #manualLocation  {
+#birthDate, #birthTime, #birthName, #birthPlace, #manualLocation, #simNowInput  {
   min-height: 40px;           /* Gives comfortable thumb-clicking target sizes on mobile */
   width: 100% !important;     /* Forces the input field to stretch across its parent container */
   box-sizing: border-box;     /* Ensures padding bounds stay clean inside the borders */
