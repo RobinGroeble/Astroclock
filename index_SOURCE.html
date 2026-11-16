@@ -31477,6 +31477,7 @@ if (p.settings) {
   SETTINGS.zodiac = p.settings.zodiacMode || SETTINGS.zodiac;
   SETTINGS.houseSystem = p.settings.houseSystem || SETTINGS.houseSystem;
   SETTINGS.almutenMethod = p.settings.almutenMethod || SETTINGS.almutenMethod;
+  SETTINGS.timeStandard = p.settings.timeStandard || SETTINGS.timeStandard;
 
   applySettingsToUI(); // sync UI
 }
@@ -49258,7 +49259,8 @@ window.globalAiCalculatorText = (nameStr ? `Name: ${nameStr}\n\n` : '') + `Sun i
 data.profiles[name].settings = {
   zodiacMode: SETTINGS.zodiac,
   houseSystem: SETTINGS.houseSystem,
-  almutenMethod: SETTINGS.almutenMethod
+  almutenMethod: SETTINGS.almutenMethod,
+  timeStandard: SETTINGS.timeStandard
 };
 
   // store base AI dataset (will be upgraded later)
