@@ -12599,6 +12599,7 @@ score_tooltip: {
 },
 
 time_std_local: 'Local time (timezone/DST)',
+time_std_local_short: 'Local time',
 time_std_utc: 'UTC (already universal time)',
 time_std_lmt: 'LMT (Local Mean Time via longitude)',
 time_standard_label: "Interpret Birth Time As",
@@ -13241,6 +13242,7 @@ score_tooltip: {
 },
 
 time_std_local: 'Hora local (zona horaria/DST)',
+time_std_local_short: 'Hora local',
 time_std_utc: 'UTC (ya es hora universal)',
 time_std_lmt: 'LMT (Hora Media Local por longitud)',
 time_standard_label: "Interpretar la hora de nacimiento como",
@@ -13700,6 +13702,7 @@ badge_custom_time: "VIAGGIO NEL TEMPO",
   zeitgeist_no_ingress: 'Nessun cambio di segno nelle ultime {h} ore.',
 
 time_std_local: 'Ora locale (fuso orario/ora legale)',
+time_std_local_short: 'Ora locale',
 time_std_utc: 'UTC (già tempo universale)',
 time_std_lmt: 'LMT (Tempo Medio Locale da longitudine)',
 time_standard_label: "Interpreta l’ora di nascita come",
@@ -14317,6 +14320,7 @@ house_system_equal: 'Gleichhäuser',
 house_system_placidus: 'Placidus',
 key_attributes_label: "Schlüsselmerkmale",
 time_std_local: 'Ortszeit (Zeitzone/Sommerzeit)',
+time_std_local_short: 'Ortszeit',
 time_std_utc: 'UTC (bereits Universalzeit)',
 time_std_lmt: 'LMT (Ortsmittlere Zeit nach Längengrad)',
 time_standard_label: "Geburtszeit interpretieren als",
@@ -14883,6 +14887,7 @@ lonfmt_ddm_option:'Degrés + minutes décimales (DDM)',
 lonfmt_dd_option:'Degrés décimaux (DD)',
 
 time_std_local: 'Heure locale (fuseau/DST)',
+time_std_local_short: 'Heure locale',
 time_std_utc: 'UTC (déjà en temps universel)',
 time_std_lmt: 'LMT (Temps moyen local via longitude)',
 time_standard_label: "Interpréter l’heure de naissance comme",
@@ -31647,7 +31652,7 @@ ${t.profile_birth_time}: ${p.birthTime || '-'} (${
     ? 'UTC'
     : p.settings?.timeStandard === 'lmt'
       ? 'LMT'
-      : 'Local'
+      : (t.time_std_local_short || 'Local time')
 })<br>
 ${t.profile_birth_place}: ${p.birthPlace || '-'}<br>
 
