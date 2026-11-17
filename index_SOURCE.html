@@ -90,7 +90,7 @@
     "name":"Astrology Calculator, Financial Astrology & AstroGANN Trading Signals | AstroClock",
     "description":"Free astrology calculator with natal charts, real-time transits, moon phases, eclipses, financial astrology, AstroGANN trading signals, Münchner Rhythmenlehre, Gemini AI integration and Swiss Ephemeris precision.",
     "inLanguage":"en",
-    "dateModified":"2026-11-15",
+    "dateModified":"2026-11-17",
     "primaryImageOfPage":{"@type":"ImageObject","url":"https://astroclock.ch/assets/hero-image-V02.jpg"},
     "keywords":"astrology, astroclock, birth chart, natal chart, horoscope, astrology calculator, real-time transits, astro-finance, financial astrology, trading astrology, astro trading, AstroGANN, astro-gann, w.d. gann, gann trading, gann fan, square of 9, planetary trading signals, planetary market cycles, crypto astrology, bitcoin astrology, market timing, stock market astrology, trading signals, münchner rhythmenlehre, rhythmenlehre, wolfgang döbereiner, döbereiner astrology, dobereiner astrology, life cycle astrology, 7 year astrology cycle, house activation cycle, astrological life phases, house progression astrology"
   }
@@ -31556,7 +31556,23 @@ context += `
 
 Name: ${p.name || '-'}
 Birth date: ${p.birthDate || '-'}
-Birth time: ${p.birthTime || '-'}
+Birth time: ${p.birthTime || '—'}${
+
+  p.settings?.timeStandard
+
+    ? ` (${p.settings.timeStandard === 'local'
+
+        ? 'Local'
+
+        : p.settings.timeStandard === 'utc'
+
+          ? 'UTC'
+
+          : 'LMT'})`
+
+    : ''
+
+}
 Location: ${p.birthPlace || '-'}
 
 ${cleanedProfileText}
@@ -31626,7 +31642,13 @@ ${t.profile_almuten}: ${p.settings?.almutenMethod || '-'}<br>
 <br>
 
 ${t.profile_birth_date}: ${formatDate(p.birthDate)}<br>
-${t.profile_birth_time}: ${p.birthTime || '-'}<br>
+${t.profile_birth_time}: ${p.birthTime || '-'} (${
+  p.settings?.timeStandard === 'utc'
+    ? 'UTC'
+    : p.settings?.timeStandard === 'lmt'
+      ? 'LMT'
+      : 'Local'
+})<br>
 ${t.profile_birth_place}: ${p.birthPlace || '-'}<br>
 
 <br>
