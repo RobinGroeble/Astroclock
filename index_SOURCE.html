@@ -26661,6 +26661,15 @@ function scoreBadge(score){
   return `<span class="badge-score ${cls}" data-score="${sign}">${sign}</span>`;
 }
 
+function textBadge(text, score){
+  const cls = scoreClass(score);
+
+  return `
+    <span class="badge-score ${cls}">
+      ${text}
+    </span>
+  `;
+}
 
 function aspectBadgeHtml(hit, pOther, arrowHtml = ''){
   const orbText = `(${fmtOrb(hit.orb)})`;
@@ -44194,12 +44203,18 @@ const NEUTRAL_ICON_STR = `<svg class="ai-icon" width="18" height="18" viewBox="0
 
         <li>
           <strong>${t.risk_opportunity}:</strong>
-          ${oppLabel(lifeOpp, t)}
+          ${textBadge(
+  oppLabel(lifeOpp, t),
+  lifeOpp
+)}
         </li>
 
         <li>
           <strong>${t.risk_judgment}:</strong>
-          ${clarityLabel(lifeJud, t)}
+          ${textBadge(
+  clarityLabel(lifeJud, t),
+  lifeJud
+)}
         </li>
 
       </ul>
@@ -44217,12 +44232,18 @@ const NEUTRAL_ICON_STR = `<svg class="ai-icon" width="18" height="18" viewBox="0
 
         <li>
           <strong>${t.risk_opportunity}:</strong>
-          ${oppLabel(moneyOpp, t)}
+          ${textBadge(
+  oppLabel(moneyOpp, t),
+  moneyOpp
+)}
         </li>
 
         <li>
           <strong>${t.risk_judgment}:</strong>
-          ${clarityLabel(moneyJud, t)}
+          ${textBadge(
+  clarityLabel(moneyJud, t),
+  moneyJud
+)}
         </li>
 
       </ul>
